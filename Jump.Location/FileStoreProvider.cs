@@ -72,8 +72,9 @@ namespace Jump.Location
             string.Format("{1}\t{0}", record.FullName, record.Weight.ToString(CultureInfo.InvariantCulture)));
 
             bool createdNew;
-            using (var mutex = new Mutex(false, _mutexId, out createdNew, _securitySettings))
+            using (var mutex = new Mutex(false, _mutexId, out createdNew))
             {
+                mutex.SetAccessControl(_securitySettings);
                 var hasHandle = false;
                 try
                 {

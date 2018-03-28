@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jump.Location", "Jump.Location\Jump.Location.csproj", "{813430AC-0181-4ACB-B731-C5F6578CEC64}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jump.Location", "Jump.Location\Jump.Location.csproj", "{813430AC-0181-4ACB-B731-C5F6578CEC64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jump.Location.Specs", "Jump.Location.Specs\Jump.Location.Specs.csproj", "{C0A231D4-4E62-4E22-BD81-EB8257B15D21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jump.Location.Specs", "Jump.Location.Specs\Jump.Location.Specs.csproj", "{C0A231D4-4E62-4E22-BD81-EB8257B15D21}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4B6F34CE-160F-4857-82B2-6369A41AA07B}"
 	ProjectSection(SolutionItems) = preProject
@@ -28,5 +30,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D751D01-DDE2-4B8B-A18F-193CA87F6A6C}
 	EndGlobalSection
 EndGlobal

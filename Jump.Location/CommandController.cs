@@ -97,7 +97,7 @@ namespace Jump.Location
                 }
                 catch (Exception e)
                 {
-                    EventLog.WriteEntry("Application", string.Format("{0}\r\n{1}", e, e.StackTrace));
+                    // EventLog.WriteEntry("Application", string.Format("{0}\r\n{1}", e, e.StackTrace));
                 }
             }
         }
