@@ -52,10 +52,14 @@ namespace Jump.Location
             _mutexId = string.Format("Global\\{{{0}}}", appGuid);
 
             // setting up security for multi-user usage
-            // work also on localized systems (don't use just "Everyone") 
-            var allowEveryoneRule = new MutexAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null), MutexRights.FullControl, AccessControlType.Allow);
-            _securitySettings = new MutexSecurity();
-            _securitySettings.AddAccessRule(allowEveryoneRule);
+            // work also on localized systems (don't use just "Everyone")
+
+            bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+            if (isWindows) {
+                var allowEveryoneRule = new MutexAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null), MutexRights.FullControl, AccessControlType.Allow);
+                _securitySettings = new MutexSecurity();
+                _securitySettings.AddAccessRule(allowEveryoneRule);
+            }
         }
 
         public event FileStoreUpdated FileStoreUpdated;
@@ -74,7 +78,9 @@ namespace Jump.Location
             bool createdNew;
             using (var mutex = new Mutex(false, _mutexId, out createdNew))
             {
-                mutex.SetAccessControl(_securitySettings);
+                if (_securitySettings != null) {
+                    mutex.SetAccessControl(_securitySettings);
+                }
                 var hasHandle = false;
                 try
                 {
@@ -92,7 +98,7 @@ namespace Jump.Location
                         // Log the fact the mutex was abandoned in another process, it will still get aquired
                         hasHandle = true;
                     }
-                    
+
                     // We can lose all history, if powershell will be closed during operation.
                     File.WriteAllLines(_pathTemp, lines.ToArray());
                     // NTFS guarantees atomic move operation http://stackoverflow.com/questions/774098/atomicity-of-file-move

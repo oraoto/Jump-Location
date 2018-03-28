@@ -17,7 +17,7 @@ namespace Jump.Location
         private bool needsToSave;
         // pin timer to prevent GC
         private Timer saveTimer;
-        
+
         // In powershell_ise different tabs are represent different runspaces in the same process.
         // The prepor implementation requires ConditionalWeakTable from .NET 4.5
         private Dictionary<Runspace, DirectoryWaitPeriod> _waitPeriodDictionary;
@@ -48,6 +48,7 @@ namespace Jump.Location
                 if (defaultInstance == null)
                 {
                     var home = Environment.GetEnvironmentVariable("USERPROFILE");
+                    home = home ?? Environment.GetEnvironmentVariable("HOME");
                     home = home ?? Path.Combine(Environment.GetEnvironmentVariable("HOMEDRIVE"), Environment.GetEnvironmentVariable("HOMEPATH"));
                     var dbLocation = Path.Combine(home, "jump-location.txt");
                     defaultInstance = Create(dbLocation);
